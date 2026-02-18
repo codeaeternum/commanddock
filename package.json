@@ -44,12 +44,13 @@
       "allowToChangeInstallationDirectory": false
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
+      "target": "AppImage",
       "icon": "assets/icon.png",
-      "category": "Development"
+      "category": "Development",
+      "executableName": "commanddock"
+    },
+    "appImage": {
+      "artifactName": "CommandDock-${version}.AppImage"
     }
   },
   "dependencies": {
