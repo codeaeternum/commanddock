@@ -2,6 +2,14 @@
 
 All notable changes to CommandDock will be documented in this file.
 
+## [1.0.1] — 2026-02-18
+
+### ⚙️ Improvements
+- 🖥️ **Multi-Platform Builds** — now available for Windows (NSIS + portable), macOS (DMG), and Linux (AppImage + deb)
+- 🎨 **Custom App Icon** — new branded icon for all platforms
+- 🔄 **CI/CD Pipeline** — GitHub Actions auto-builds on tag push
+- 🏷️ **Updated App ID** — `com.codeaeternum.commanddock`
+
 ## [1.0.0] — 2026-02-18
 
 ### 🎉 Initial Release

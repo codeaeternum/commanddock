@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows-latest
@@ -32,6 +33,12 @@ jobs:
           node-version: 20
           cache: 'npm'
 
+      - name: Install Linux dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools rpm
+
       - name: Install dependencies
         run: npm ci
 
@@ -44,7 +51,9 @@ jobs:
 
       - name: Build Electron (macOS)
         if: matrix.platform == 'mac'
-        run: npx electron-builder --mac dmg
+        run: npx electron-builder --mac dmg --publish never
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
 
       - name: Build Electron (Linux)
         if: matrix.platform == 'linux'
@@ -64,6 +73,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    if: always() && !cancelled()
 
     steps:
       - name: Download all artifacts
@@ -73,7 +83,7 @@ jobs:
           merge-multiple: true
 
       - name: List artifacts
-        run: find artifacts -type f | head -20
+        run: find artifacts -type f 2>/dev/null || echo "No artifacts found"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
