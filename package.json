@@ -13,10 +13,11 @@
     "electron:build": "vite build && electron-builder --win --mac",
     "electron:build:win": "vite build && electron-builder --win",
     "electron:build:mac": "vite build && electron-builder --mac",
-    "electron:build:portable": "vite build && electron-builder --win portable"
+    "electron:build:portable": "vite build && electron-builder --win portable",
+    "electron:build:linux": "vite build && electron-builder --linux"
   },
   "build": {
-    "appId": "com.galindo.commanddock",
+    "appId": "com.codeaeternum.commanddock",
     "productName": "CommandDock",
     "directories": {
       "output": "release"
@@ -41,6 +42,14 @@
       "oneClick": true,
       "perMachine": false,
       "allowToChangeInstallationDirectory": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "assets/icon.png",
+      "category": "Development"
     }
   },
   "dependencies": {
